@@ -1,0 +1,48 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library", "cc_test")
+load("@rules_foreign_cc//foreign_cc:repositories.bzl", "rules_foreign_cc_dependencies")
+load("@rules_foreign_cc//foreign_cc:defs.bzl", "cmake")
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library", "cc_test")
+load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
+
+buildifier(
+    name = "buildifier",
+)
+
+# "-DWITH_FFMPEG=OFF" is for https://github.com/opencv/opencv/issues/22748
+cmake(
+    name = "opencv",
+    cmake_options = [
+        "-DBUILD_LIST=calib3d,core,features2d,highgui,imgcodecs,imgproc,video,videoio,ml",
+        "-DWITH_FFMPEG=OFF",
+    ],
+    lib_source = "@opencv//:all",
+    out_include_dir = "include/opencv4",
+    out_shared_libs = [
+        "libopencv_ml.so.408",
+        "libopencv_calib3d.so.408",
+        "libopencv_core.so.408",
+        "libopencv_flann.so.408",
+        "libopencv_features2d.so.408",
+        "libopencv_highgui.so.408",
+        "libopencv_imgcodecs.so.408",
+        "libopencv_imgproc.so.408",
+        "libopencv_video.so.408",
+        "libopencv_videoio.so.408",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+cc_binary(
+    name = "playground_main",
+    srcs = [
+        "playground_main.cc",
+    ],
+    deps = [
+        "@com_github_gflags_gflags//:gflags",
+        "@com_github_google_glog//:glog",
+        "@com_google_absl//absl/flags:flag",
+        "@com_google_absl//absl/flags:parse",
+        "@com_google_absl//absl/status",
+        "@com_google_absl//absl/strings",
+    ],
+)
