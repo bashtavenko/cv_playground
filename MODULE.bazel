@@ -1,0 +1,19 @@
+"""Bazel build and test dependencies."""
+
+# NOTE: When editing this file, also update the lockfile.
+#   bazel mod deps --lockfile_mode=update
+
+#module(
+#    name = "cv_playground",
+#    version = "1.0",
+#)
+#
+#bazel_dep(name = "bazel_skylib", version = "1.4.2")
+#bazel_dep(name = "gflags", version = "2.2.2", repo_name = "com_github_gflags_gflags")
+#bazel_dep(name = "abseil-cpp", version = "20220623.1", repo_name = "com_google_absl")
+#bazel_dep(name = "glog", version = "0.6.0", repo_name = "com_github_google_glog")
+#bazel_dep(name = "protobuf", version = "3.19.0", repo_name = "com_google_protobuf")
+#bazel_dep(name = "googletest", version = "1.12.1", repo_name = "com_google_googletest")
+#bazel_dep(name = "rules_foreign_cc", version = "0.9.0")
+
+# -- bazel_dep definitions -- #
